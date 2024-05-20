@@ -9,7 +9,7 @@ import { QrGenerator } from "@/components/qrGenerator";
 export default async function Admin({
   searchParams,
 }: {
-  searchParams: { error: string; message: string };
+  searchParams: { error: string; message: string; username: string };
 }) {
   const password = cookies().get("adminpw")?.value;
 
@@ -54,7 +54,7 @@ export default async function Admin({
       redirect(`/admin?error=${newError.message}`);
     }
 
-    redirect(`/admin?message=${player[0].id}`);
+    redirect(`/admin?message=${player[0].id}&username=${username}`);
   }
 
   if (password === process.env.NEXT_PRIVATE_ADMIN_PASSWORD) {
@@ -62,6 +62,7 @@ export default async function Admin({
       <main className="min-h-screen flex flex-col justify-center items-center text-2xl gap-6 p-12">
         {searchParams?.message ? (
           <div className="flex flex-col items-center gap-6">
+            <div>{searchParams.username}</div>
             <QrGenerator id={searchParams.message} />
             <a href="/admin">Add New Player</a>
           </div>

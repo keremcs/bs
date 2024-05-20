@@ -90,7 +90,7 @@ export function Game({
           placeholder="Faiz oranını belirle"
           type="number"
           step={0.01}
-          autoFocus
+          required
         />
         <div className="flex w-full justify-end pt-6">
           <LoadingButton />
@@ -153,16 +153,16 @@ export function Game({
       )}
       <div className="flex flex-col gap-6">
         <p className="font-semibold">{question[step - 1].qt}</p>
-        <RadioGroup name="answer" className="grid grid-cols-1 gap-6">
-          <label className="inline-flex items-center break-words rounded-md p-4 space-x-2 bg-secondary has-[:checked]:bg-green-300">
+        <RadioGroup name="answer" className="grid grid-cols-1 gap-6" required>
+          <label className="inline-flex items-center break-words rounded-md p-4 space-x-2 bg-secondary dark:has-[:checked]:text-secondary has-[:checked]:bg-green-300">
             <RadioGroupItem value="A" />
             <div>{question[step - 1].aw[0]}</div>
           </label>
-          <label className="inline-flex items-center break-words rounded-md p-4 space-x-2 bg-secondary has-[:checked]:bg-green-300">
+          <label className="inline-flex items-center break-words rounded-md p-4 space-x-2 bg-secondary dark:has-[:checked]:text-secondary has-[:checked]:bg-green-300">
             <RadioGroupItem value="B" />
             <div>{question[step - 1].aw[1]}</div>
           </label>
-          <label className="inline-flex items-center break-words rounded-md p-4 space-x-2 bg-secondary text-secondary-foreground has-[:checked]:bg-green-300">
+          <label className="inline-flex items-center break-words rounded-md p-4 space-x-2 bg-secondary dark:has-[:checked]:text-secondary has-[:checked]:bg-green-300">
             <RadioGroupItem value="C" />
             <div>{question[step - 1].aw[2]}</div>
           </label>

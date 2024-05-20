@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Game } from "@/components/thegame";
 import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
@@ -25,13 +26,23 @@ export default async function GamePlayer({
 
   const { data: exist, error: existError } = await supabase
     .from("tedubs")
-    .select("step, r1, r2, r3, r4")
+    .select("score, step, r1, r2, r3, r4")
     .eq("id", userId);
   if (existError || exist.length === 0) {
     redirect("/");
   }
 
+  const score = exist[0].score;
   const step = exist[0].step;
+
+  if (step === 3 && score === 0) {
+    return (
+      <main className="flex flex-col min-h-screen items-center justify-center p-6">
+        <img src="/fired.jpeg" alt="fired" />
+      </main>
+    );
+  }
+
   const cbgame = {
     r1: exist[0].r1,
     r2: exist[0].r2,
