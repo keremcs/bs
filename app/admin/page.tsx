@@ -43,11 +43,12 @@ export default async function Admin({
     );
 
     const username = String(formData.get("username"));
+    const safename = username.toLowerCase();
     const { data: player, error: newError } = await supabase
       .from("tedubs")
       .insert({
         step: 1,
-        username,
+        username: safename,
       })
       .select("id");
     if (newError) {
